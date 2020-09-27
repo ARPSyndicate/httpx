@@ -535,11 +535,17 @@ retry:
 		if port > 0 {
 			domainFile = fmt.Sprintf("%s.%d%s", domain, port, scanopts.RequestURI)
 		}
+		// On various OS the file max file name length is 255 - https://serverfault.com/questions/9546/filename-length-limits-on-linux
+		// Truncating length at 255
+		if len(domainFile) >= 255 {
+			// leaving last 4 bytes free to append ".txt"
+			domainFile = domainFile[:251]
+		}
 		domainFile = strings.Replace(domainFile, "/", "_", -1) + ".txt"
 		responsePath := path.Join(scanopts.StoreResponseDirectory, domainFile)
 		err := ioutil.WriteFile(responsePath, []byte(resp.Raw), 0644)
 		if err != nil {
-			gologger.Fatalf("Could not write response, at path '%s', to disc.", responsePath)
+			gologger.Warningf("Could not write response, at path '%s', to disc.", responsePath)
 		}
 	}
 
@@ -791,11 +797,11 @@ const banner = `
   / __ \/ __/ __/ __ \|   / 
  / / / / /_/ /_/ /_/ /   |  
 /_/ /_/\__/\__/ .___/_/|_|  
-             /_/              v1.0.1
+             /_/              v1.0.2
 `
 
 // Version is the current version of httpx
-const Version = `1.0.1`
+const Version = `1.0.2`
 
 // showBanner is used to show the banner to the user
 func showBanner() {
