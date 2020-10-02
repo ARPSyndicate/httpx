@@ -2,6 +2,7 @@ package httpx
 
 import (
 	"strings"
+	"time"
 )
 
 // Response contains the response to a server
@@ -13,10 +14,11 @@ type Response struct {
 	Raw           string
 	Words         int
 	Lines         int
-	TlsData       *TlsData
-	CspData       *CspData
-	Http2         bool
+	TLSData       *TLSData
+	CSPData       *CSPData
+	HTTP2         bool
 	Pipeline      bool
+	Duration      time.Duration
 }
 
 // GetHeader value
@@ -30,7 +32,7 @@ func (r *Response) GetHeader(name string) string {
 }
 
 // GetHeaderPart with offset
-func (r *Response) GetHeaderPart(name string, sep string) string {
+func (r *Response) GetHeaderPart(name, sep string) string {
 	v, ok := r.Headers[name]
 	if ok && len(v) > 0 {
 		tokens := strings.Split(strings.Join(v, " "), sep)

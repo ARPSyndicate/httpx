@@ -19,12 +19,15 @@ func FolderExists(folderpath string) bool {
 
 // HasStdin determines if the user has piped input
 func HasStdin() bool {
-	fi, err := os.Stdin.Stat()
+	stat, err := os.Stdin.Stat()
 	if err != nil {
 		return false
 	}
-	if fi.Mode()&os.ModeNamedPipe == 0 {
-		return false
-	}
-	return true
+
+	mode := stat.Mode()
+
+	isPipedFromChrDev := (mode & os.ModeCharDevice) == 0
+	isPipedFromFIFO := (mode & os.ModeNamedPipe) != 0
+
+	return isPipedFromChrDev || isPipedFromFIFO
 }
