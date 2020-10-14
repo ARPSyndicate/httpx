@@ -27,12 +27,15 @@ type DialerFunc func(context.Context, string, string) (net.Conn, error)
 
 // NewDialer gets a new Dialer instance using a resolver cache
 func NewDialer(options Options) (DialerFunc, error) {
-	var err error
-	cache, err = New(options)
-	if err != nil {
-		return nil, err
+	if cache == nil {
+		var err error
+		cache, err = New(options)
+		if err != nil {
+			return nil, err
+		}
+		dialerHistory = freecache.NewCache(options.CacheSize * megaByteBytes)
 	}
-	dialerHistory = freecache.NewCache(options.CacheSize * megaByteBytes)
+
 	dialer := &net.Dialer{
 		Timeout:   10 * time.Second,
 		KeepAlive: 10 * time.Second,
@@ -44,10 +47,12 @@ func NewDialer(options Options) (DialerFunc, error) {
 		// we need to filter out empty records
 		hostname := address[:separator]
 		dnsResult, err := cache.Lookup(hostname)
-		if err != nil || len(dnsResult.IPs) == 0 {
+		if err != nil || len(dnsResult.IP4s)+len(dnsResult.IP6s) == 0 {
 			return nil, &NoAddressFoundError{}
-		} // Dial to the IPs finally.
-		for _, ip := range dnsResult.IPs {
+		}
+
+		// Dial to the IPs finally.
+		for _, ip := range append(dnsResult.IP4s, dnsResult.IP6s...) {
 			conn, err = dialer.DialContext(ctx, network, ip+address[separator:])
 			if err == nil {
 				setErr := dialerHistory.Set([]byte(hostname), []byte(ip), 0)
