@@ -17,7 +17,7 @@ require (
 	github.com/projectdiscovery/mapcidr v0.0.6
 	github.com/projectdiscovery/rawhttp v0.0.6
 	github.com/projectdiscovery/retryablehttp-go v1.0.1
-	github.com/projectdiscovery/wappalyzergo v0.0.2
+	github.com/projectdiscovery/wappalyzergo v0.0.3
 	github.com/remeh/sizedwaitgroup v1.0.0
 	github.com/rs/xid v1.3.0
 	golang.org/x/net v0.0.0-20210421230115-4e50805a0758

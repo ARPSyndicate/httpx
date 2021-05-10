@@ -78,8 +78,8 @@ github.com/projectdiscovery/retryabledns v1.0.8-0.20210226233812-ee2ecc9839d9 h1
 github.com/projectdiscovery/retryabledns v1.0.8-0.20210226233812-ee2ecc9839d9/go.mod h1:4sMC8HZyF01HXukRleSQYwz4870bwgb4+hTSXTMrkf4=
 github.com/projectdiscovery/retryablehttp-go v1.0.1 h1:V7wUvsZNq1Rcz7+IlcyoyQlNwshuwptuBVYWw9lx8RE=
 github.com/projectdiscovery/retryablehttp-go v1.0.1/go.mod h1:SrN6iLZilNG1X4neq1D+SBxoqfAF4nyzvmevkTkWsek=
-github.com/projectdiscovery/wappalyzergo v0.0.2 h1:pBqpp04ngQjFr1LPqHcJ7qaiL0AOVY19IGmSjg5/+DI=
-github.com/projectdiscovery/wappalyzergo v0.0.2/go.mod h1:vS+npIOANv7eKsEtODsyRQt2n1v8VofCwj2gjmq72EM=
+github.com/projectdiscovery/wappalyzergo v0.0.3 h1:UwaQyl0vbNx+rqwObzvV+YBECQ2NvWAcY/A1KpJyLCA=
+github.com/projectdiscovery/wappalyzergo v0.0.3/go.mod h1:vS+npIOANv7eKsEtODsyRQt2n1v8VofCwj2gjmq72EM=
 github.com/remeh/sizedwaitgroup v1.0.0 h1:VNGGFwNo/R5+MJBf6yrsr110p0m4/OX4S3DCy7Kyl5E=
 github.com/remeh/sizedwaitgroup v1.0.0/go.mod h1:3j2R4OIe/SeS6YDhICBy22RWjJC5eNCJ1V+9+NVNYlo=
 github.com/rs/xid v1.3.0 h1:6NjYksEUlhurdVehpc7S7dk6DAmcKv8V9gG0FsVN2U4=
